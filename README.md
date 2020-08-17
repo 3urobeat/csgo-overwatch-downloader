@@ -37,5 +37,5 @@ Have fun!
 Thanks to [takeshixx](https://github.com/takeshixx/csgo-overwatcher) for helping me to filter CS:GO overwatch packets by having his source code available on GitHub!  
 
 ## FAQ
-Q: Will this get me banned?
+Q: Will this get me banned?  
 A: No. This script doesn't interfere with your game - it just sniffs on the network traffic when downloading the overwatch case and gets the URL from where CS:GO downloads the evidence. It's the same method like using Wireshark - just automated with Python.  
