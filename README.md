@@ -7,7 +7,7 @@ This python script allows you to easily download the uncensored version of your 
 Make sure to have [Python 3](https://www.python.org/downloads/) (`Windows x86-64 executeable installer`) installed.  
 If you are using Linux then you should be able to download python3 from your distribution's packet manager.  
 
-If you don't know if you have Python installed, open a `cmd` and type `python3 --version`.  
+If you don't know if you have Python installed, open a `cmd` and type `py --version` or `python --version`.  
 If the command is not recognized you will have to install it from the link above.  
 > I haven't tested the Microsoft Store version of Python 3.  
 
@@ -18,6 +18,7 @@ If you are not sure if you have it installed just proceed - the script will tell
 
 Start the script by opening a `cmd`, `PowerShell` or your other favorite terminal.  
 Type `py -m pip install scapy requests` and let the two packages install.  
+If `py` doesn't work for you try `python` or `python3`. I'm not sure which one works now since Microsoft added Python into their stupid Store.  
 
 ## Usage
 Type `py downloader.py "csgo_path"` into your terminal and replace `csgo_path` with the path to your csgo folder.  
