@@ -32,7 +32,7 @@ def finish(filename):
     else:
         print("\n----\nAfter moving the demo file to " + r'Counter-Strike Global Offensive\csgo\\' + " type this into the console:")
         
-    print("playdemo " + filename.replace(".dem", ""))
+    print("playdemo " + filename.replace(".dem", "").replace(".bz2", ""))
     print("----\n")
     
     print("Finished!")
