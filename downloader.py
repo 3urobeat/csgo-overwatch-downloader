@@ -3,6 +3,8 @@ import scapy.all
 import requests
 import bz2
 import sys
+import os
+import platform
 
 # Key words to filter overwatch demo packages from uninteresting ones - Thanks for constructing the regex: https://github.com/takeshixx/csgo-overwatcher
 DEMO_FILENAME = re.compile(r'GET /730/(\d+_\d+.dem.bz2)')
@@ -10,7 +12,13 @@ URL_PATH = re.compile(r'GET (/730/\d+_\d+.dem.bz2)')
 FILE_HOST = re.compile(r'Host: (replay\d+.valve.net)')
 FILE_HOST2 = re.compile(r'Host: (replay\d+.wmsj.cn)') # two different hosts can occur
 
-version = "1.0"
+version = "1.1"
+
+# Check for root privileges on Linux
+if platform.system() == "Linux":
+    if os.getuid() != 0:
+        print("\nPlease run this script with root privileges!\nI'm otherwise not able to sniff on your network for packages that contain the demo file.")
+        exit()
 
 # Display welcome text
 print(f"\nCSGO-Overwatch-Downloader v{version} by 3urobeat")
@@ -48,7 +56,13 @@ def downloaddemo(demourl, filename):
     # idea: check default installation paths? Maybe get the csgo installation path from registry? or just leave it like this
     if len(sys.argv) > 1: # Check if user provided a folder to the csgo installation
         print(f"Saving file to {str(sys.argv[1])}...")
-        open(str(sys.argv[1]) + "\\" + str(filename).replace(".bz2", ""), 'wb').write(decompressed_file) # Save file with filename we acquired from packet info but remove bz2 because we just decompressed it
+        
+        if platform.system() == "Windows":
+            slash = "\\" # Windows is weird and uses backslashes
+        else:
+            slash = "/"
+        
+        open(str(sys.argv[1]) + slash + str(filename).replace(".bz2", ""), 'wb').write(decompressed_file) # Save file with filename we acquired from packet info but remove bz2 because we just decompressed it
     else:
         print("\nSaving file to the script's directory because you haven't provided a path to your CS:GO installation.\nYou will have to move the demo to the " + r'Counter-Strike Global Offensive\csgo\\' + " yourself in order to watch it.")
         open(str(filename).replace(".bz2", ""), 'wb').write(decompressed_file)
