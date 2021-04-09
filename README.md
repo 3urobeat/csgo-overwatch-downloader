@@ -32,7 +32,10 @@ If you are on Linux, make sure to start the script as root! Example: `sudo pytho
 
 If you are using the default location on Windows it is probably `C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo`.  
 If you changed your installation path you will probably know where you installed CS:GO. If not, right click on CS:GO in your Steam library, open the Properties, click on `Local Files` and then on `Browse`. This will open the folder in your file explorer.  
-> Make sure your path is in quotation marks and has no slash at the end! Example: `py downloader.py "C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo"`  
+  
+> Make sure your path is in quotation marks and has no slash at the end!  
+> Example Windows: `py downloader.py "C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo"`
+> Example Linux: `sudo python3 downloader.py "/media/tomg/SSD/Steam Games/steamapps/common/Counter-Strike Global Offensive/csgo"`  
 
 If you don't provide a path you will have to move the demo to your folder by yourself in order to be able to play it from the csgo console.  
 
