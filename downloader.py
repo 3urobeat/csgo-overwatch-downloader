@@ -20,6 +20,12 @@ if platform.system() == "Linux":
         print("\nPlease run this script with root privileges!\nI'm otherwise not able to sniff on your network for packages that contain the demo file.")
         exit()
 
+# Define the type of slash used by this os for future messages
+if platform.system() == "Windows":
+    slash = "\\" # Windows is weird and uses backslashes
+else:
+    slash = "/"
+
 # Display welcome text
 print(f"\nCSGO-Overwatch-Downloader v{version} by 3urobeat")
 print("---------------------------\n")
@@ -38,7 +44,7 @@ def finish(filename):
     if len(sys.argv) > 1:
         print("\n----\nPut this command into your csgo console to play the demo:")
     else:
-        print("\n----\nAfter moving the demo file to " + r'Counter-Strike Global Offensive\csgo\\' + " type this into the console:")
+        print(f"\n----\nAfter moving the demo file to \'{slash}Counter-Strike Global Offensive{slash}csgo{slash}\' type this into the console:")
         
     print("playdemo " + filename.replace(".dem", "").replace(".bz2", ""))
     print("----\n")
@@ -57,14 +63,9 @@ def downloaddemo(demourl, filename):
     if len(sys.argv) > 1: # Check if user provided a folder to the csgo installation
         print(f"Saving file to {str(sys.argv[1])}...")
         
-        if platform.system() == "Windows":
-            slash = "\\" # Windows is weird and uses backslashes
-        else:
-            slash = "/"
-        
         open(str(sys.argv[1]) + slash + str(filename).replace(".bz2", ""), 'wb').write(decompressed_file) # Save file with filename we acquired from packet info but remove bz2 because we just decompressed it
     else:
-        print("\nSaving file to the script's directory because you haven't provided a path to your CS:GO installation.\nYou will have to move the demo to the " + r'Counter-Strike Global Offensive\csgo\\' + " yourself in order to watch it.")
+        print(f"\nSaving file to the script's directory because you haven't provided a path to your CS:GO installation.\nYou will have to move the demo to the \'Counter-Strike Global Offensive{slash}csgo{slash}\' yourself in order to watch it.")
         open(str(filename).replace(".bz2", ""), 'wb').write(decompressed_file)
     
     finish(str(filename))
@@ -80,12 +81,12 @@ def checkpacket(pkt):
        
     if url_matches and any([host_matches, host2_matches]): # check if packet info has url matches and if one of the both possible hosts match
         if host_matches: # Check which one of the two hosts is the matching one
-            demourl = f'http://{host_matches[0]}{url_matches[0]}' # Build URL from both matches
+            demourl = f'http://{host_matches[0].decode("utf-8")}{url_matches[0].decode("utf-8")}' # Build URL from both matches
         else:
-            demourl = f'http://{host2_matches[0]}{url_matches[0]}'
+            demourl = f'http://{host2_matches[0].decode("utf-8")}{url_matches[0].decode("utf-8")}'
             
         print(f"Found a demo! ({demourl})")
-        filename = DEMO_FILENAME.findall(packet)[0]
+        filename = DEMO_FILENAME.findall(packet)[0].decode("utf-8")
         
         downloaddemo(demourl, filename) # start downloading the demo we found
 
