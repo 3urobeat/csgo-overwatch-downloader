@@ -7,12 +7,12 @@ import os
 import platform
 
 # Key words to filter overwatch demo packages from uninteresting ones - Thanks for constructing the regex: https://github.com/takeshixx/csgo-overwatcher
-DEMO_FILENAME = re.compile(r'GET /730/(\d+_\d+.dem.bz2)')
-URL_PATH = re.compile(r'GET (/730/\d+_\d+.dem.bz2)')
-FILE_HOST = re.compile(r'Host: (replay\d+.valve.net)')
-FILE_HOST2 = re.compile(r'Host: (replay\d+.wmsj.cn)') # two different hosts can occur
+DEMO_FILENAME = re.compile(b'GET /730/(\d+_\d+.dem.bz2)')
+URL_PATH = re.compile(b'GET (/730/\d+_\d+.dem.bz2)')
+FILE_HOST = re.compile(b'Host: (replay\d+.valve.net)')
+FILE_HOST2 = re.compile(b'Host: (replay\d+.wmsj.cn)') # two different hosts can occur
 
-version = "1.1"
+version = "1.2"
 
 # Check for root privileges on Linux
 if platform.system() == "Linux":
@@ -72,7 +72,7 @@ def downloaddemo(demourl, filename):
 def checkpacket(pkt):
     # Got some inspiration on how to analyse the packet from here (Thanks again ^^): https://github.com/takeshixx/csgo-overwatcher
     
-    packet = str(pkt) # Convert packet information to string
+    packet = bytes(pkt) # Convert packet information to string
 
     url_matches = URL_PATH.findall(packet) # get all matches with URL_PATH in an array
     host_matches = FILE_HOST.findall(packet)
