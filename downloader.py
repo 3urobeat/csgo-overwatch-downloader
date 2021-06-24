@@ -7,7 +7,7 @@ import os
 import platform
 
 # Key words to filter overwatch demo packages from uninteresting ones - Thanks for constructing the regex: https://github.com/takeshixx/csgo-overwatcher
-DEMO_FILENAME = re.compile(b'GET /730/(\d+_\d+.dem.bz2)')
+DEMO_FILENAME = re.compile(b'GET /730/(\d+_\d+.dem.bz2)') # make them byte strings to avoid str(pkt) makes no sense warning from scapy
 URL_PATH = re.compile(b'GET (/730/\d+_\d+.dem.bz2)')
 FILE_HOST = re.compile(b'Host: (replay\d+.valve.net)')
 FILE_HOST2 = re.compile(b'Host: (replay\d+.wmsj.cn)') # two different hosts can occur
@@ -73,7 +73,7 @@ def downloaddemo(demourl, filename):
 def checkpacket(pkt):
     # Got some inspiration on how to analyse the packet from here (Thanks again ^^): https://github.com/takeshixx/csgo-overwatcher
     
-    packet = bytes(pkt) # Convert packet information to string
+    packet = bytes(pkt) # Convert packet information to bytes to avoid str(pkt) makes no sense warning from scapy
 
     url_matches = URL_PATH.findall(packet) # get all matches with URL_PATH in an array
     host_matches = FILE_HOST.findall(packet)
@@ -81,7 +81,7 @@ def checkpacket(pkt):
        
     if url_matches and any([host_matches, host2_matches]): # check if packet info has url matches and if one of the both possible hosts match
         if host_matches: # Check which one of the two hosts is the matching one
-            demourl = f'http://{host_matches[0].decode("utf-8")}{url_matches[0].decode("utf-8")}' # Build URL from both matches
+            demourl = f'http://{host_matches[0].decode("utf-8")}{url_matches[0].decode("utf-8")}' # Build URL from both matches but convert byte string back to normal string
         else:
             demourl = f'http://{host2_matches[0].decode("utf-8")}{url_matches[0].decode("utf-8")}'
             
