@@ -1,7 +1,7 @@
 # csgo-overwatch-downloader
 This python script allows you to easily download the uncensored version of your Overwatch Case!  
 
-![Screenshot](https://raw.githubusercontent.com/HerrEurobeat/csgo-overwatch-downloader/master/.github/img/demo.png)
+![Screenshot](https://raw.githubusercontent.com/3urobeat/csgo-overwatch-downloader/master/.github/img/demo.png)
 
 ## Download
 Make sure to have [Python 3](https://www.python.org/downloads/) (`Windows x86-64 executeable installer`) installed.  
@@ -14,7 +14,7 @@ If the command is not recognized you will have to install it from the link above
 Make sure to have `Win10Pcap` or `Ncap` installed if you are running on Windows.  
 If you are not sure if you have it installed just proceed - the script will tell you.  
 
-[Download this script](https://github.com/HerrEurobeat/csgo-overwatch-downloader/archive/master.zip) and extract the folder.  
+[Download this script](https://github.com/3urobeat/csgo-overwatch-downloader/archive/master.zip) and extract the folder.  
 
 Open the folder in a `cmd`, `PowerShell` or any other terminal.  
 You can do this on Windows by clicking on "File" in the top left corner of your file explorer and then clicking on `Open PowerShell` or `Open Command Prompt`.  
